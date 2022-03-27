@@ -36,12 +36,6 @@ namespace DimensionClient.Library.Controls
         {
             InitializeComponent();
 
-            imgHead.SetBinding(DataContextProperty, "HeadPortrait");
-            txbNickName.SetBinding(Run.TextProperty, "NickName");
-            txbRemarkName.SetBinding(Run.TextProperty, "RemarkName");
-            brdBadge.SetBinding(VisibilityProperty, new Binding { Path = new PropertyPath("Unread"), Converter = FindResource<BoolVisibilityConvert>("BoolVisibilityConvert") });
-            txbBadgeNumber.SetBinding(TextBlock.TextProperty, "Unread");
-
             MasterChat.itcMasterChat.SetBinding(ItemsControl.ItemsSourceProperty, "ChatContent");
             MasterChat.brdUnread.IsVisibleChanged += BrdUnread_IsVisibleChanged;
             MasterChat.Loaded += MasterChat_Loaded;
@@ -69,6 +63,7 @@ namespace DimensionClient.Library.Controls
                         borderSelect.IsEnabled = true;
                     }
                     borderSelect = brdChat;
+                    // 把自己传送给聊天主窗口, 主窗口会看空间的DataContxt, 拿到用户的名称等信息
                     TransferringData(typeof(ChatMain), DataPassingType.SelectMessage, this);
                 }
             }
@@ -258,6 +253,7 @@ namespace DimensionClient.Library.Controls
             }
             borderSelect = brdChat;
             ChatFriendID = chatColumn.FriendID;
+            // 把自己传送给聊天主窗口, 主窗口会看空间的DataContxt, 拿到用户的名称等信息
             TransferringData(typeof(ChatMain), DataPassingType.SelectMessage, this);
         }
         public void Send()
