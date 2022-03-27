@@ -97,7 +97,7 @@
                     </Popup>
                 </Grid>
                 <Button x:Name="btnMin" Style="{StaticResource ButtonMin}" Height="48" Width="50" Click="BtnMin_Click"/>
-                <Button x:Name="btnState" Style="{StaticResource ButtonState}" Height="48" Width="50" Click="BtnState_Click"/>
+                <Button x:Name="btnState" Style="{StaticResource ButtonState}" Height="48" Width="50" Click="BtnState_Click" Cursor="Hand"/>
                 <Button x:Name="btnClose" Style="{StaticResource ButtonClose}" Height="48" Width="50" Click="BtnClose_Click"/>
             </StackPanel>
         </Grid>

@@ -11,7 +11,7 @@ namespace DimensionClient.Common
         {
             try
             {
-                byte[] dataBytes = Encoding.UTF8.GetBytes(data != null ? data.ToString() : string.Empty);
+                //byte[] dataBytes = Encoding.UTF8.GetBytes(data != null ? data.ToString() : string.Empty);
                 HttpClient request = new();
                 if (dimension)
                 {

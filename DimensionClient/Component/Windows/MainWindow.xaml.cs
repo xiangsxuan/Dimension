@@ -21,14 +21,16 @@ namespace DimensionClient.Component.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        // 钩子
+        // 钩子 目的是为了截图功能
         private HwndSource hwnd;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // 主窗体, 保存在全局了
             ClassHelper.MainWindow = this;
+            // 全局各种新消息界面显示, 都绑定到主窗体显示了
             ClassHelper.MessageHint += ClassHelper_MessageHint;
             ClassHelper.NotificationHint += ClassHelper_NotificationHint;
             ClassHelper.RoutedChanged += ClassHelper_RoutedChanged;
@@ -38,7 +40,8 @@ namespace DimensionClient.Component.Windows
             SignalRClientHelper.CallInviteSignalR += SignalRClientHelper_CallInviteSignalR;
 
             #region 绑定全局属性
-            grdInformation.DataContext = ClassHelper.commonView;
+            grdInformation.DataContext = ClassHelper.commonView; // 通用全局ViewModel
+
             conHeadImage.SetBinding(DynamicImage.ImagePathProperty, new Binding { Path = new PropertyPath("HeadPortrait"), Converter = ClassHelper.FindResource<IValueConverter>("ImageSourceOnlineConvert"), ConverterParameter = "60" });
             conInformationHead.SetBinding(DynamicImage.ImagePathProperty, new Binding { Path = new PropertyPath("HeadPortrait"), Converter = ClassHelper.FindResource<IValueConverter>("ImageSourceOnlineConvert"), ConverterParameter = "60" });
             brdInformationOnLine.SetBinding(Border.BackgroundProperty, new Binding { Path = new PropertyPath("OnLine"), Converter = ClassHelper.FindResource<IValueConverter>("OnLineStatusConvert") });
@@ -49,6 +52,7 @@ namespace DimensionClient.Component.Windows
 
         private void AppMain_Loaded(object sender, RoutedEventArgs e)
         {
+            // 截图钩子
             ThreadPool.QueueUserWorkItem(Load);
             if (ClassHelper.RegisteredHotkey(this))
             {
@@ -110,6 +114,7 @@ namespace DimensionClient.Component.Windows
 
         private void ClassHelper_MessageHint(int messageType, string message)
         {
+            // Toast消息提示
             Dispatcher.Invoke(delegate
             {
                 ToastMessage toastMessage = new(message, messageType);
@@ -123,6 +128,7 @@ namespace DimensionClient.Component.Windows
 
         private void ClassHelper_NotificationHint(string title, string message)
         {
+            // Notification消息提示
             Dispatcher.Invoke(delegate
             {
                 NotificationMessage notificationMessage = new(title, message);
@@ -136,6 +142,7 @@ namespace DimensionClient.Component.Windows
 
         private void ClassHelper_RoutedChanged(ClassHelper.PageType pageName)
         {
+            // 页面导航 Frame类天然提供了导航的方法
             Dispatcher.Invoke(delegate
             {
                 if (femRouteMain.Content?.GetType().Name == pageName.ToString())
@@ -168,6 +175,7 @@ namespace DimensionClient.Component.Windows
 
         private void FemRouteMain_Navigated(object sender, NavigationEventArgs e)
         {
+            // 左侧菜单, 选中项动画
             Grid grid = null;
             if (femRouteMain.CanGoBack)
             {
@@ -195,7 +203,7 @@ namespace DimensionClient.Component.Windows
                 ThicknessAnimation thicknessAnimation = new()
                 {
                     To = new Thickness(0, Convert.ToInt32(grid.Tag), 0, 0),
-                    Duration = new TimeSpan(0, 0, 0, 0, 300),
+                    Duration = new TimeSpan(0, 0, 0, 5, 300),
                     EasingFunction = new BackEase { EasingMode = EasingMode.EaseInOut }
                 };
                 brdSlider.BeginAnimation(MarginProperty, thicknessAnimation);
@@ -268,6 +276,7 @@ namespace DimensionClient.Component.Windows
                     {
                         if (item.ShowActivated && item.GetType() == typeof(Screenshots))
                         {
+                            // 截图窗口已经开启了就不再相应了
                             return IntPtr.Zero;
                         }
                     }
@@ -285,6 +294,7 @@ namespace DimensionClient.Component.Windows
         }
         private static void ScreenCapture()
         {
+            // 截屏
             List<DisplayInfoModel> displays = ClassHelper.GetDisplayInfos();
             int actualLeft = 0;
             int actualTop = 0;
@@ -351,7 +361,9 @@ namespace DimensionClient.Component.Windows
         private static void BrdSelectPage_PointerUp(object sender)
         {
             Border border = (Border)sender;
-            ClassHelper.SwitchRoute((ClassHelper.PageType)Enum.Parse(typeof(ClassHelper.PageType), $"{border.Name[3..]}Page"));
+            // border.Name[3..] 是取字符串的3个以后
+            string pageName = $"{border.Name[3..]}Page";
+            ClassHelper.SwitchRoute((ClassHelper.PageType)Enum.Parse(typeof(ClassHelper.PageType), pageName));
         }
         private void VoiceCall(bool isEnter)
         {

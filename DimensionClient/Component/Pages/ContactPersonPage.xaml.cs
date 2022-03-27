@@ -25,6 +25,8 @@ namespace DimensionClient.Component.Pages
 
             mainData = Resources["MainData"] as ContactPersonViewModel;
             newFriendData = Resources["NewFriendData"] as FriendDetailsModel;
+
+            // todo: SignalR通信
             SignalRClientHelper.FriendOnlineSignalR += SignalRClientHelper_FriendOnlineSignalR;
             SignalRClientHelper.NewFriendSignalR += SignalRClientHelper_NewFriendSignalR;
             SignalRClientHelper.FriendChangedSignalR += SignalRClientHelper_FriendChangedSignalR;
@@ -178,6 +180,11 @@ namespace DimensionClient.Component.Pages
             newFriendData.InitializeVariable();
             stfAddFriends.BeginAnimation(ScaleTransform.ScaleYProperty, null);
         }
+
+        /// <summary>
+        /// 查找好友
+        /// </summary>
+        /// <param name="data"></param>
         private void FindFriends(object data)
         {
             Dispatcher.Invoke(delegate
@@ -218,6 +225,7 @@ namespace DimensionClient.Component.Pages
         }
         private void FriendAddSend(object data)
         {
+            // 添加好友
             Dispatcher.Invoke(delegate
             {
                 btnFriendAddSend.IsEnabled = false;

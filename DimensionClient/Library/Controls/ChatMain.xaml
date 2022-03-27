@@ -67,7 +67,8 @@
                         </Border>
                     </StackPanel>
                 </Border>
-                <Button x:Name="btnSend" Style="{StaticResource ButtonPrimaryWait}" Height="28" HorizontalAlignment="Right" Margin="0,6,0,0" Padding="0" FontSize="14" Content="发送" Click="BtnSend_Click" DockPanel.Dock="Bottom"/>
+                <Button x:Name="btnSend" Style="{StaticResource ButtonPrimaryWait}" Height="28" HorizontalAlignment="Right" Margin="0,6,0,0" Padding="0" FontSize="14" Content="发送" 
+                        Click="BtnSend_Click" DockPanel.Dock="Bottom"/>
                 <RichTextBox x:Name="rtbMessage" Style="{x:Null}" BorderThickness="0" Margin="2,0,2,0" IsDocumentEnabled="True" FontSize="14" DockPanel.Dock="Top" DataObject.Pasting="RtbMessage_Pasting" KeyDown="RtbMessage_KeyDown">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">

@@ -21,6 +21,7 @@ namespace DimensionClient.Component.Pages
             InitializeComponent();
 
             mainData = DataContext as MessageCenterViewModel;
+            // todo: SignalR相应
             SignalRClientHelper.RemarkInfoChangedSignalR += SignalRClientHelper_RemarkInfoChangedSignalR;
             SignalRClientHelper.ChatColumnChangedSignalR += SignalRClientHelper_ChatColumnChangedSignalR;
         }
@@ -37,6 +38,7 @@ namespace DimensionClient.Component.Pages
 
         private void SignalRClientHelper_RemarkInfoChangedSignalR(string friendID)
         {
+            // 
             if (UserManagerService.GetFriendInfo(out FriendDetailsModel friendDetails, friendID: friendID))
             {
                 foreach (ChatColumnInfoModel item in mainData.ChatColumnInfos)
@@ -80,6 +82,7 @@ namespace DimensionClient.Component.Pages
         #region 执行事件
         private void Load(object data)
         {
+            // 加载左侧列表, 点击列表后界面变化, 都由左侧列表进一步触发
             if (mainData.ChatColumnInfos.Count == 0)
             {
                 if (ChatService.GetChatColumnInfo(out List<ChatColumnInfoModel> chatColumnInfos))

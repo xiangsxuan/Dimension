@@ -39,7 +39,8 @@
                 <Button Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30" Content="New"/>
                 <Line VerticalAlignment="Bottom" X1="0" Y1="0" X2="240" Y2="0" Stroke="#EBEEF5"/>
             </Grid>
-            <ItemsControl x:Name="itcChat" Grid.Row="1" Style="{StaticResource ItemsControlVirtualization}" Margin="0,10,0,10" ItemsSource="{Binding ChatColumnInfos}" ManipulationBoundaryFeedback="ItemsControl_ManipulationBoundaryFeedback">
+            <ItemsControl x:Name="itcChat" Grid.Row="1" Style="{StaticResource ItemsControlVirtualization}" Margin="0,10,0,10" 
+                          ItemsSource="{Binding ChatColumnInfos}" ManipulationBoundaryFeedback="ItemsControl_ManipulationBoundaryFeedback">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <controls:ChatItem DataContext="{Binding}"/>

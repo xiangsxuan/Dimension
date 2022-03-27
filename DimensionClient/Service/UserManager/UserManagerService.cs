@@ -88,6 +88,12 @@ namespace DimensionClient.Service.UserManager
             }
         }
 
+        /// <summary>
+        /// 添加好友
+        /// </summary>
+        /// <param name="friendID"></param>
+        /// <param name="verifyInfo"></param>
+        /// <returns></returns>
         public static bool FriendRegistration(string friendID, string verifyInfo)
         {
             JObject requestObj = new()

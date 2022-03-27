@@ -9,6 +9,9 @@ namespace DimensionClient.Models.ViewModels
         private List<FriendSortModel> friends;
         private List<NewFriendBriefModel> newFriends;
 
+        /// <summary>
+        /// 上部"好友/新朋友"选中项
+        /// </summary>
         public bool SlidingBlockState
         {
             get => slidingBlockState;

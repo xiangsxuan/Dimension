@@ -22,6 +22,7 @@ namespace DimensionClient.Component.Windows
         {
             InitializeComponent();
 
+            // 登录窗口保存全局
             ClassHelper.LoginWindow = this;
         }
 
@@ -224,6 +225,7 @@ namespace DimensionClient.Component.Windows
         }
         public void LoginSuccess(GetUserInfoModel getUserInfo)
         {
+            // 用户信息确实需要保存一个全局位置, 因为很大概率会用在各个地方
             ClassHelper.commonView.NickName = getUserInfo.NickName;
             ClassHelper.commonView.PhoneNumber = getUserInfo.PhoneNumber;
             ClassHelper.commonView.HeadPortrait = getUserInfo.HeadPortrait;

@@ -94,6 +94,7 @@ namespace DimensionClient.Library.Controls
         #region 执行事件
         private void GetFriendDetails(object data)
         {
+            // 更新用户信息
             Dispatcher.Invoke(delegate
             {
                 txbRemarkNameAction.Text = "\xe78c";

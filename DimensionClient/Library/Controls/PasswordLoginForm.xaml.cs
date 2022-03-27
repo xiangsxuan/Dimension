@@ -134,6 +134,7 @@ namespace DimensionClient.Library.Controls
         }
         private void PasswordLoginRequest(object data)
         {
+            // 跟界面有关的, 都包在主Dispathcer里
             Dispatcher.Invoke(delegate
             {
                 txtLoginName.IsEnabled = false;

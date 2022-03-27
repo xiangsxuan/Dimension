@@ -67,6 +67,7 @@ namespace DimensionClient.Common
         // 主窗体
         public static MainWindow MainWindow { get; set; }
         // 选中的聊天好友ID
+        // 同时只能选中一个, 这种时候使用全局静态变脸, 确实是合适的
         public static string ChatFriendID { get; set; }
         // 选中的联系人好友ID
         public static string ContactPersonFriendID { get; set; }

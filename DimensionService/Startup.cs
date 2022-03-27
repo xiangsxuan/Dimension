@@ -18,7 +18,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
-
 namespace DimensionService
 {
     public static class Startup

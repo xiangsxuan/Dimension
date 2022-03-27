@@ -122,6 +122,7 @@ namespace DimensionClient.Component.Windows
             Bitmap bitmap = new(maxWidth, maxHeight);
             Graphics.FromImage(bitmap).DrawImage(artwork, new Rectangle(0, 0, maxWidth, maxHeight), new(minWidth, minHeight, maxWidth, maxHeight), GraphicsUnit.Pixel);
             IntPtr delPtr = bitmap.GetHbitmap();
+            // 截图保存剪贴板了
             Clipboard.SetImage(Imaging.CreateBitmapSourceFromHBitmap(delPtr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions()));
             ClassHelper.DeleteIntPtr(delPtr);
 
