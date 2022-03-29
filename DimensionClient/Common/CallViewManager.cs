@@ -186,6 +186,7 @@ namespace DimensionClient.Common
 
                         callVideoData.IsVideo = true;
                         cloud.startLocalPreview(IntPtr.Zero);
+                        // 视频传输的关键, 回调传回图像
                         cloud.setLocalVideoRenderCallback(TRTCVideoPixelFormat.TRTCVideoPixelFormat_BGRA32, TRTCVideoBufferType.TRTCVideoBufferType_Buffer, callVideoData);
                     }
                 }

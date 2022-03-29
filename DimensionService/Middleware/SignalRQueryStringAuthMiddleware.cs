@@ -4,6 +4,9 @@ using Microsoft.Extensions.Primitives;
 
 namespace DimensionService.Middleware
 {
+    /// <summary>
+    /// 认证信息检查中间件
+    /// </summary>
     public class SignalRQueryStringAuthMiddleware
     {
         private readonly RequestDelegate _next;
@@ -20,7 +23,7 @@ namespace DimensionService.Middleware
                 if (context.Request.Query.TryGetValue("UserID", out StringValues userID) && context.Request.Query.TryGetValue("Token", out StringValues token) && context.Request.Query.TryGetValue("Device", out StringValues useDevice))
                 {
                     if (!LoginInfoDAO.CheckToken(userID, token, (UseDevice)Enum.Parse(typeof(UseDevice), useDevice)))
-                    {
+                    {// 检查认证
                         context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
                         return;
                     }
